@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSA CODER Calculator</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-200">
+
+    
+    <div class="bg-white rounded-lg shadow-lg p-6 w-[320px]">
+       
+        <input id="display" 
+               type="text" 
+               class="w-full h-16 bg-gray-100 text-right text-3xl p-4 rounded-lg mb-4 outline-none" 
+               placeholder="0" 
+               readonly />
+
+    
+        <div class="grid grid-cols-4 gap-2">
+            
+            <button onclick="clearDisplay()" class="bg-red-500 text-white rounded-lg h-16 font-bold">C</button>
+            <button onclick="deleteLast()" class="bg-yellow-500 text-white rounded-lg h-16 font-bold">⌫</button>
+            <button onclick="appendValue('%')" class="bg-blue-500 text-white rounded-lg h-16 font-bold">%</button>
+            <button onclick="appendValue('/')" class="bg-blue-500 text-white rounded-lg h-16 font-bold">÷</button>
+
+            
+            <button onclick="appendValue('7')" class="bg-gray-200 text-black rounded-lg h-16 font-bold">7</button>
+            <button onclick="appendValue('8')" class="bg-gray-200 text-black rounded-lg h-16 font-bold">8</button>
+            <button onclick="appendValue('9')" class="bg-gray-200 text-black rounded-lg h-16 font-bold">9</button>
+            <button onclick="appendValue('*')" class="bg-blue-500 text-white rounded-lg h-16 font-bold">×</button>
+
+            
+            <button onclick="appendValue('4')" class="bg-gray-200 text-black rounded-lg h-16 font-bold">4</button>
+            <button onclick="appendValue('5')" class="bg-gray-200 text-black rounded-lg h-16 font-bold">5</button>
+            <button onclick="appendValue('6')" class="bg-gray-200 text-black rounded-lg h-16 font-bold">6</button>
+            <button onclick="appendValue('-')" class="bg-blue-500 text-white rounded-lg h-16 font-bold">−</button>
+            <button onclick="appendValue('1')" class="bg-gray-200 text-black rounded-lg h-16 font-bold">1</button>
+            <button onclick="appendValue('2')" class="bg-gray-200 text-black rounded-lg h-16 font-bold">2</button>
+            <button onclick="appendValue('3')" class="bg-gray-200 text-black rounded-lg h-16 font-bold">3</button>
+            <button onclick="appendValue('+')" class="bg-blue-500 text-white rounded-lg h-16 font-bold">+</button>
+
+            
+            <button onclick="appendValue('0')" class="col-span-2 bg-gray-200 text-black rounded-lg h-16 font-bold">0</button>
+            <button onclick="appendValue('.')" class="bg-gray-200 text-black rounded-lg h-16 font-bold">.</button>
+            <button onclick="calculate()" class="bg-green-500 text-white rounded-lg h-16 font-bold">=</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+
+        
+        function appendValue(value) {
+            if (display.value === "Error") {
+                display.value = ""; 
+            }
+            display.value += value;
+        }
+
+       
+        function clearDisplay() {
+            display.value = "";
+        }
+
+      
+        function deleteLast() {
+            display.value = display.value.slice(0, -1);
+        }
+
+        
+        function calculate() {
+            try {
+                
+                display.value = eval(display.value.replace('÷', '/').replace('×', '*'));
+            } catch (error) {
+                display.value = "Error"; 
+            }
+        }
+    </script>
+
+</body>
+</html>
